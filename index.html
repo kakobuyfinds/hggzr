@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSSBuy spreadsheet | Product Finds, QC &amp; Shipping Guide</title>
+  <meta name="description" content="Browse a CSSBuy spreadsheet with shoes, hoodies, T-shirts, jackets and bags from HipobuyFind. Compare CNY prices, estimated USD prices and checks to make before ordering.">
+  <meta name="robots" content="index,follow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#173e35">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CSSBuy spreadsheet | Product Finds, QC &amp; Shipping Guide">
+  <meta property="og:description" content="Filter HipobuyFind listings, compare reference prices and make a shortlist before ordering.">
+  <!-- index.html
+    竞品参考：https://sopel.fit/cssbuy-spreadsheet 和 https://grails.fit/cssbuy-spreadsheet。
+    这两份搜索结果以大目录和商品浏览为主，GRAILS 另突出 QC 照片。
+    本页用 CNY 与 USD 并列、目录筛选、各品类检查要点和到手成本拆分帮助选购。
+    Google 和 Bing 尚未提交。上线后以最终公开 URL 为准，加入自引用 canonical。
+    在已验证的 Google Search Console 属性中检查该 URL 并请求编入索引。
+    在已验证的 Bing Webmaster Tools 属性中使用 URL Submission 提交同一 URL。
+    https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl
+    https://www.bing.com/webmasters/help/URL-Submission-62f2860b
+  -->
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182e28;
+      --muted: #52655d;
+      --green: #173e35;
+      --paper: #f6f6ef;
+      --white: #ffffff;
+      --line: #d7e0d8;
+      --lime: #def38c;
+      font-family: "Inter", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; background: var(--paper); color: var(--ink); line-height: 1.6; }
+    a { color: var(--green); text-underline-offset: .2em; }
+    a:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible {
+      outline: 3px solid #24775d;
+      outline-offset: 4px;
+    }
+    .wrap { width: min(70rem, calc(100% - 2rem)); margin-inline: auto; }
+    .hero {
+      margin-block: 2rem 3rem;
+      padding: clamp(2rem, 7vw, 5.5rem) 1.25rem;
+      border-radius: 2rem;
+      text-align: center;
+      color: var(--white);
+      background: radial-gradient(ellipse at top right, #39735f, transparent 62%), var(--green);
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      letter-spacing: -.065em;
+      line-height: 1.04;
+    }
+    .hero p { max-width: 39rem; margin: 1.25rem auto; color: #e5efe9; }
+    .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
+    .button {
+      display: inline-block;
+      padding: .7rem 1.25rem;
+      border-radius: 999px;
+      background: var(--lime);
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 750;
+    }
+    .button.secondary { background: var(--white); }
+    .button:focus-visible { outline-color: var(--white); }
+    section { margin-block: 3rem; }
+    h2 { margin: 0 0 .5rem; font-size: clamp(1.65rem, 4vw, 2.65rem); line-height: 1.1; letter-spacing: -.045em; }
+    section > p, footer { color: var(--muted); }
+    .filters {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: .75rem;
+      margin-top: 1.25rem;
+    }
+    label { display: grid; gap: .25rem; font-weight: 700; }
+    input, select {
+      min-width: 0;
+      width: 100%;
+      padding: .65rem .7rem;
+      border: 1px solid #a0b4a8;
+      border-radius: .6rem;
+      background: var(--white);
+      color: var(--ink);
+      font: inherit;
+    }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .card, .panel { background: var(--white); border: 1px solid var(--line); border-radius: 1rem; padding: 1.15rem; }
+    .card { display: flex; flex-direction: column; align-items: flex-start; border-top: .3rem solid #9bbf9d; }
+    .category { color: var(--muted); font-size: .85rem; }
+    .card h3 { margin: .35rem 0; font-size: 1.2rem; line-height: 1.3; }
+    .price { margin: .25rem 0; font-weight: 750; font-variant-numeric: tabular-nums; }
+    .card p:not(.price) { color: var(--muted); margin: .3rem 0 .85rem; }
+    .card a { margin-top: auto; font-weight: 750; }
+    .panel { margin-block: .65rem; }
+    summary { cursor: pointer; font-weight: 750; }
+    details p { margin-bottom: 0; }
+    footer { border-top: 1px solid var(--line); padding-block: 1.25rem 2rem; }
+    @media (max-width: 48rem) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 34rem) {
+      .hero { margin-top: 1rem; border-radius: 1.25rem; }
+      .grid, .filters { grid-template-columns: 1fr; }
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "CSSBuy spreadsheet",
+      "description": "A filterable selection of HipobuyFind listings with reference prices and a purchase checklist.",
+      "inLanguage": "en",
+      "mainEntity": {
+        "@type": "ItemList",
+        "name": "Selected HipobuyFind listings",
+        "itemListElement": [
+          {"@type":"ListItem","position":1,"name":"Leather Dress Shoes","url":"https://hipobuyfind.com/goods-148189.html"},
+          {"@type":"ListItem","position":2,"name":"Fleece-Lined Hoodie","url":"https://hipobuyfind.com/goods-154917.html"},
+          {"@type":"ListItem","position":3,"name":"Graphic Short-Sleeve T-Shirt","url":"https://hipobuyfind.com/goods-154920.html"},
+          {"@type":"ListItem","position":4,"name":"Hooded Quick-Dry Jacket","url":"https://hipobuyfind.com/goods-154851.html"},
+          {"@type":"ListItem","position":5,"name":"Beige Quilted Drawstring Mini Backpack","url":"https://hipobuyfind.com/goods-154850.html"}
+        ]
+      }
+    }
+  </script>
+<link rel="canonical" href="https://kakobuyfinds.github.io/hggzr/">
+</head>
+<body>
+  <header class="hero wrap">
+    <h1>CSSBuy spreadsheet</h1>
+    <p>Compare shoes, clothing and bags from HipobuyFind by category and reference price. Use the size and quality-control checklist before you order.</p>
+    <nav class="actions" aria-label="Shop on HipobuyFind">
+      <a class="button" href="https://hipobuyfind.com/">CSSBuy spreadsheet</a>
+      <a class="button secondary" href="https://hipobuyfind.com/">Buy it now</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section aria-labelledby="catalog-title">
+      <h2 id="catalog-title">Product catalog</h2>
+      <p>Selected listings from <a href="https://hipobuyfind.com/">HipobuyFind</a>. USD figures are approximate. Check the source listing for current prices, stock and available variants.</p>
+      <div class="filters" id="filters" hidden>
+        <label for="search">Search listings
+          <input id="search" type="search" placeholder="Try fleece or 154917">
+        </label>
+        <label for="category">Category
+          <select id="category">
+            <option value="">All categories</option>
+            <option value="shoes">Shoes</option>
+            <option value="hoodies">Hoodies</option>
+            <option value="tees">T-shirts</option>
+            <option value="jackets">Jackets</option>
+            <option value="bags">Bags</option>
+          </select>
+        </label>
+        <label for="sort">Sort by
+          <select id="sort">
+            <option value="featured">Featured</option>
+            <option value="low">Price, low to high</option>
+            <option value="high">Price, high to low</option>
+          </select>
+        </label>
+      </div>
+      <p id="results" role="status" hidden></p>
+      <div class="grid" id="catalog">
+        <article class="card" data-category="shoes" data-cny="400">
+          <span class="category">Shoes · 148189</span>
+          <h3>Leather Dress Shoes</h3>
+          <p class="price">¥400.00 · ≈ US$55.56</p>
+          <p>Compare the seller’s insole length with a pair you already wear.</p>
+          <a href="https://hipobuyfind.com/goods-148189.html" aria-label="View Leather Dress Shoes on HipobuyFind">View listing</a>
+        </article>
+        <article class="card" data-category="hoodies" data-cny="170">
+          <span class="category">Hoodies · 154917</span>
+          <h3>Fleece-Lined Hoodie</h3>
+          <p class="price">¥170.00 · ≈ US$23.61</p>
+          <p>Check chest width and body length against a hoodie that fits.</p>
+          <a href="https://hipobuyfind.com/goods-154917.html" aria-label="View Fleece-Lined Hoodie on HipobuyFind">View listing</a>
+        </article>
+        <article class="card" data-category="tees" data-cny="105">
+          <span class="category">T-shirts · 154920</span>
+          <h3>Graphic Short-Sleeve T-Shirt</h3>
+          <p class="price">¥105.00 · ≈ US$14.58</p>
+          <p>Check garment width and look for a close-up of the print.</p>
+          <a href="https://hipobuyfind.com/goods-154920.html" aria-label="View Graphic Short-Sleeve T-Shirt on HipobuyFind">View listing</a>
+        </article>
+        <article class="card" data-category="jackets" data-cny="157.14">
+          <span class="category">Jackets · 154851</span>
+          <h3>Hooded Quick-Dry Jacket</h3>
+          <p class="price">¥157.14 · ≈ US$21.83</p>
+          <p>Check sleeve length and leave room for your usual layers.</p>
+          <a href="https://hipobuyfind.com/goods-154851.html" aria-label="View Hooded Quick-Dry Jacket on HipobuyFind">View listing</a>
+        </article>
+        <article class="card" data-category="bags" data-cny="340">
+          <span class="category">Bags · 154850</span>
+          <h3>Beige Quilted Drawstring Mini Backpack</h3>
+          <p class="price">¥340.00 · ≈ US$47.22</p>
+          <p>Compare the listed dimensions with the largest item you carry.</p>
+          <a href="https://hipobuyfind.com/goods-154850.html" aria-label="View Beige Quilted Drawstring Mini Backpack on HipobuyFind">View listing</a>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="checklist-title">
+      <h2 id="checklist-title">Before ordering through CSSBuy</h2>
+      <ol class="panel">
+        <li>Open the HipobuyFind product page and check the original seller link, selected size, color and price.</li>
+        <li>If you choose to order through CSSBuy, check whether it accepts the original seller URL and confirm the item and domestic delivery charges.</li>
+        <li>If warehouse QC photos are available, compare them with the variant you ordered. Check measurements, stitching, print placement and any visible damage before approving shipment.</li>
+        <li>Estimate the total using the item price, domestic delivery, any service fees, international shipping and applicable taxes or duties.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="faq-title">
+      <h2 id="faq-title">CSSBuy spreadsheet FAQ</h2>
+      <details class="panel">
+        <summary>Where do the links on this spreadsheet go?</summary>
+        <p>The two main buttons open HipobuyFind. Each product link opens its corresponding HipobuyFind listing, where you can check for the original seller link. This is an independent guide to browsing the catalog.</p>
+      </details>
+      <details class="panel">
+        <summary>What does the approximate USD price cover?</summary>
+        <p>It reflects the listed CNY item price converted to USD for comparison. Use the actual exchange rate and the shipping and fee estimates shown when you order.</p>
+      </details>
+      <details class="panel">
+        <summary>What should I look for in warehouse QC photos?</summary>
+        <p>Start with the exact color, size and quantity you ordered. For shoes, look at both sides and the soles. For clothing, request measurements in centimeters if fit is uncertain. For bags, check the closures, straps and visible seams.</p>
+      </details>
+      <details class="panel">
+        <summary>What if the original seller link has expired?</summary>
+        <p>Search the item name on HipobuyFind and compare any replacement listing by photos, measurements, seller details and price before ordering.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="wrap">Independent shopping guide · Catalog source <a href="https://hipobuyfind.com/">HipobuyFind</a></footer>
+
+  <script>
+    const catalog = document.querySelector('#catalog');
+    const cards = [...catalog.querySelectorAll('.card')];
+    const search = document.querySelector('#search');
+    const category = document.querySelector('#category');
+    const sort = document.querySelector('#sort');
+    const results = document.querySelector('#results');
+
+    function updateCatalog() {
+      const query = search.value.trim().toLowerCase();
+      const selectedCategory = category.value;
+      const orderedCards = [...cards];
+
+      if (sort.value !== 'featured') {
+        const direction = sort.value === 'low' ? 1 : -1;
+        orderedCards.sort((first, second) =>
+          direction * (Number(first.dataset.cny) - Number(second.dataset.cny))
+        );
+      }
+
+      let visibleCount = 0;
+      for (const card of orderedCards) {
+        const matchesText = card.textContent.toLowerCase().includes(query);
+        const matchesCategory = !selectedCategory || card.dataset.category === selectedCategory;
+        card.hidden = !(matchesText && matchesCategory);
+        if (!card.hidden) visibleCount += 1;
+        catalog.append(card);
+      }
+
+      results.textContent = visibleCount
+        ? `${visibleCount} of ${cards.length} listings`
+        : 'No matching listings. Try another term or choose all categories.';
+    }
+
+    search.addEventListener('input', updateCatalog);
+    category.addEventListener('change', updateCatalog);
+    sort.addEventListener('change', updateCatalog);
+    document.querySelector('#filters').hidden = false;
+    results.hidden = false;
+    updateCatalog();
+  </script>
+</body>
+</html>
